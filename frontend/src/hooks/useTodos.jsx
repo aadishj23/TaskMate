@@ -29,7 +29,7 @@ function useTodos() {
 
     const handleComplete = async (id) => {
       try{
-        const response = await axios({
+        await axios({
           url : `http://localhost:5500/updatestatus/${id}`,
           method: "PUT",
           headers: {
@@ -37,35 +37,28 @@ function useTodos() {
             'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token') ?? '')}`
           },
         })
-        const updatedTodo = response.data.data;
-        setData((prevData) => prevData.map((todo) => {
-          if(todo._id === updatedTodo._id){
-            return updatedTodo
-          }
-          return todo
-        }))
+        await fetchData()
       } catch (error) {
         console.log("Failed to update data")
       }
     }
 
-    const handleEdit = async (id) => {
+    const handleEdit = async (id,newTitle,newDescription) => {
       try{
-        const response = await axios({
+        await axios({
           url : `http://localhost:5500/updatedata/${id}`,
           method: "PUT",
+          data: JSON.stringify({
+            title: newTitle,
+            description: newDescription
+          }),
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token') ?? '')}`
           },
         })
-        const updatedTodo = response.data.data;
-        setData((prevData) => prevData.map((todo) => {
-          if(todo._id === updatedTodo._id){
-            return updatedTodo
-          }
-          return todo
-        }))
+        await fetchData()
+        console.log("Data updated")
       } catch (error) {
         console.log("Failed to update data")
       }
@@ -73,7 +66,7 @@ function useTodos() {
 
     const handleDelete = async (id) => {
       try{
-        const response = await axios({
+        await axios({
           url : `http://localhost:5500/delete/${id}`,
           method: "DELETE",
           headers: {
@@ -81,8 +74,7 @@ function useTodos() {
             'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token') ?? '')}`
           },
         })
-        const deletedTodo = response.data.data;
-        setData((prevData) => prevData.filter((todo) => todo._id !== deletedTodo._id))
+        await fetchData()
       } catch (error) {
         console.log("Failed to delete data")
       }
@@ -100,7 +92,7 @@ function useTodos() {
         timestamp={todosdata.created_at}
         status={todosdata.status}
         onComplete={() => handleComplete(todosdata._id)}
-        onEdit={() => handleEdit(todosdata._id)}
+        onEdit={(newTitle,newDescription) => handleEdit(todosdata._id,newTitle,newDescription)}
         onDelete={() => handleDelete(todosdata._id)}
       />
     })

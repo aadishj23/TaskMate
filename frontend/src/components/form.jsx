@@ -66,7 +66,8 @@ function Form() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-8 bg-white shadow-lg rounded-lg ">
+    <div className=' bg-gray-100'>
+    <div className="max-w-md mx-auto mt-16 p-8 bg-white shadow-lg rounded-lg ">
       {isLoggedin === false ? (
         <div className="absolute top-4 right-4 flex space-x-4">
           <button 
@@ -146,8 +147,9 @@ function Form() {
         {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
         {success && <p className="mt-4 text-green-500 text-center">{success}</p>}
       </form>
+    </div>
       {isLoggedin && (
-        <div className="mt-12">
+        <div className="mt-12 lg:grid grid-cols-3">
           {todos}
         </div>
       )}
