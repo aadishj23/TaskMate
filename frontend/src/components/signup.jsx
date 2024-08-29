@@ -25,7 +25,7 @@ function Signup() {
             setIsLoading(true)
             try {
                 await axios({
-                    url: "http://localhost:5500/signup",
+                    url: "https://todoapp-cc2k.onrender.com/signup",
                     method: "POST",
                     data: JSON.stringify({
                         name: signUpData.Name,

@@ -10,7 +10,7 @@ function useTodos() {
     const fetchData = async () => {
         try{
           const response= await axios({
-            url : "http://localhost:5500/view",
+            url : "https://todoapp-cc2k.onrender.com/view",
             method: "GET",
             headers: {
               'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ function useTodos() {
     const handleComplete = async (id) => {
       try{
         await axios({
-          url : `http://localhost:5500/updatestatus/${id}`,
+          url : `https://todoapp-cc2k.onrender.com/updatestatus/${id}`,
           method: "PUT",
           headers: {
             'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ function useTodos() {
     const handleEdit = async (id,newTitle,newDescription) => {
       try{
         await axios({
-          url : `http://localhost:5500/updatedata/${id}`,
+          url : `https://todoapp-cc2k.onrender.com/updatedata/${id}`,
           method: "PUT",
           data: JSON.stringify({
             title: newTitle,
@@ -67,7 +67,7 @@ function useTodos() {
     const handleDelete = async (id) => {
       try{
         await axios({
-          url : `http://localhost:5500/delete/${id}`,
+          url : `https://todoapp-cc2k.onrender.com/delete/${id}`,
           method: "DELETE",
           headers: {
             'Content-Type': 'application/json',
