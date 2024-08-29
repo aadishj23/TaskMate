@@ -1,21 +1,45 @@
 import React from 'react';
 
 function Tododata(props) {
-  const { title, description, onDelete, onEdit, timestamp } = props;
+  const { title, description, onDelete, onEdit, onComplete, timestamp, status } = props;
 
   return (
-    <div className="max-w-md mx-auto border-2 shadow-md rounded-md p-4 bg-white flex items-center space-x-4">
+    <div className="max-w-md mx-auto border-2 shadow-md rounded-md p-4 bg-white flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
       <div className="flex-1">
         <h1 className="text-lg font-semibold mb-1 truncate">{title}</h1>
-        <p className="text-gray-700 mb-2 truncate">{description}</p>
+        <p className="text-gray-700 mb-2 truncate break-words">{description}</p>
         {timestamp && (
           <p className="text-gray-500 text-sm truncate">
             {new Date(timestamp).toLocaleDateString()}
           </p>
         )}
+        <p className={`text-sm ${status ? 'text-green-500' : 'text-red-500'}`}>
+          {status ? 'Completed' : 'Yet to be completed'}
+        </p>
       </div>
 
       <div className="flex space-x-2">
+        <button
+          onClick={onComplete}
+          aria-label="Complete"
+          className="p-2 rounded-md hover:bg-gray-200 transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-6 h-6 text-green-500"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+        </button>
+
         <button
           onClick={onEdit}
           aria-label="Edit"

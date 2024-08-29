@@ -3,11 +3,6 @@ const zod=require("zod")
 const createtodo= zod.object({
     title: zod.string(),
     description: zod.string(),
-    status: zod.boolean()
-})
-
-const updatetodo= zod.object({
-    id: zod.string()
 })
 
 const signupValidate= zod.object({
@@ -22,4 +17,4 @@ const signInValidate = zod.object({
     password: zod.string().min(8)
 })
 
-module.exports={createtodo, updatetodo,signupValidate, signInValidate}
+module.exports={createtodo,signupValidate, signInValidate}

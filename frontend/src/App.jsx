@@ -1,6 +1,5 @@
 import React from 'react'
 import Form from './components/form'
-import useTodos from './hooks/useTodos'
 import { RecoilRoot } from 'recoil'
 import Signin from './components/signin'
 import Signup from './components/signup'
@@ -35,7 +34,7 @@ function App() {
       element: <ErrorPage />
     }
   ]);
-  // const todos=useTodos();
+
   return (
     <div>
       <RouterProvider router={router} />

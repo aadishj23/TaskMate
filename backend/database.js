@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const { string } = require("zod");
 
 dotenv.config();
 const URL = process.env.DATABASE_URL; 
@@ -19,6 +20,11 @@ mongoose.connect(URL)
 });
 
 const todoDataSchema = new mongoose.Schema({
+    userid: {
+        type: String,
+        required: true,
+        ref: "User"
+    },
     title: {
         type: String,
         required: true,

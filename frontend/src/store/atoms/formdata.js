@@ -4,6 +4,6 @@ export const formdata = atom({
     key: "formdata",
     default: {
         title: "",
-        description: ""
+        description: "",
     }
 });      

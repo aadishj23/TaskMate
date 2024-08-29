@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs")
 const jwt=  require("jsonwebtoken")
 const {auth} = require("./middleware/auth")
 const {TodoData,User}=require("./database")
-const {createtodo,updatetodo,signupValidate,signInValidate}=require("./validation")
+const {createtodo,signupValidate,signInValidate}=require("./validation")
 
 dotenv.config()
 const app= express()
@@ -20,25 +20,104 @@ app.use((err,req,res,next)=>{
     })
 })
 
-app.post("/create", async (req,res) => {
-    const createpayload= req.body
-    const parsedpayload=createtodo.safeParse(createpayload)
+app.post("/create", auth,async (req,res) => {
+    const {title,description,userID}= req.body
+    const parsedpayload=createtodo.safeParse(req.body)
     if (!parsedpayload.success){
         res.status(403).json({
             msg: "invalid format"
         })
+    } else{
+        try{
+            const data = await TodoData.create({
+                userid: userID,
+                title: title,
+                description: description,
+            })
+            res.status(200).json({
+                data,
+                msg: "todo created"
+            })
+        } catch {
+            res.status(400).json({
+                msg: "error occured"
+            })
+        }
     }
-    await TodoData.create({
-        title: createpayload.title,
-        description: createpayload.description
-    })
-    res.status(200).json({
-        msg: "todo created"
-    })
 })
 
-app.get("/view" , async (req,res)=>{
-    const data= await TodoData.find()
+app.put("/updatestatus/:id", auth, async (req,res) => {
+    const {id}= req.params
+    const {userID}= req.body
+        try{
+            const data = await TodoData.updateOne({
+                _id: id,
+                userid: userID
+            },{
+                status: true
+            })
+            res.status(200).json({
+                data,
+                msg: "todo updated"
+            })
+        } catch {
+            res.status(400).json({
+                msg: "error occured"
+            })
+        }
+})
+
+app.put("/updatedata/:id", auth, async (req,res) => {
+    const {id}= req.params
+    const {userID,title,description}= req.body
+    const parsedpayload=createtodo.safeParse(req.body)
+    if (!parsedpayload.success){
+        res.status(403).json({
+            msg: "invalid format"
+        })
+    } else{
+        try{
+            const data = await TodoData.updateOne({
+                _id: id,
+                userid: userID
+            },{
+                title: title,
+                description: description
+            })
+            res.status(200).json({
+                data,
+                msg: "todo updated"
+            })
+        } catch {
+            res.status(400).json({
+                msg: "error occured"
+            })
+        }
+    }
+})
+
+app.delete("/delete/:id", auth, async (req,res) => {
+    const {id}= req.params
+    const {userID}= req.body
+    try{
+        const data = await TodoData.deleteOne({
+            _id: id,
+            userid: userID
+        })   
+        res.status(200).json({
+            data,
+            msg: "todo deleted"
+        })
+    } catch {
+        res.status(400).json({
+            msg: "error occured"
+        })
+    }
+})
+
+
+app.get("/view" , auth , async (req,res)=>{
+    const data= await TodoData.find({userid: req.body.userID})
     res.status(200).json({
         data
     })
