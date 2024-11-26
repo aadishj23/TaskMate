@@ -35,7 +35,7 @@ function Form() {
       setSuccess("");
       try {
         const response = await axios({
-          url : "https://todoapp-cc2k.onrender.com/create",
+          url : `${import.meta.env.VITE_BACKEND_URL}/create`,
           method: "POST",
           data: JSON.stringify({
             title: formData.title,
@@ -100,7 +100,7 @@ function Form() {
         </div>       
       )}
       <form onSubmit={handleSubmit}>
-        <h2 className="text-2xl font-semibold mb-6 text-center text-gray-700">Add To-Do</h2>
+        <h2 className="text-2xl font-semibold mb-6 text-center text-gray-700">Add Task</h2>
         <div className="mb-4">
           <label htmlFor='title' className="block text-sm font-medium text-gray-700">Title</label>
           <input 
@@ -141,7 +141,7 @@ function Form() {
               </svg>
               Adding...
             </>
-          ) : 'Add To-Do'}
+          ) : 'Add Task'}
         </button>
 
         {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
