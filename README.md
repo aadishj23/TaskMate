@@ -36,7 +36,7 @@ https://taskmate.aadish.tech/
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/taskmate.git
+   git clone https://github.com/aadishj23/taskmate.git
    cd taskmate
    ```
 
@@ -44,7 +44,7 @@ https://taskmate.aadish.tech/
 
    ```bash
    cd frontend
-   npm install
+   npm run dev
    ```
 
 3. Install backend dependencies:
@@ -86,7 +86,7 @@ https://taskmate.aadish.tech/
 
    ```bash
    cd frontend
-   npm start
+   npm run dev
    ```
 
 The application should now be running on `http://localhost:3000` (frontend) and `http://localhost:5000` (backend).
