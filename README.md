@@ -19,7 +19,7 @@ https://taskmate.aadish.tech/
 
 - **Frontend:** React, Tailwind CSS
 - **Backend:** Node.js, Express.js
-- **Database:** PostgreSQL
+- **Database:** MongoDB
 - **Authentication:** JWT (JSON Web Token) & bcrypt
 - **State Management:** Recoil
 
@@ -28,7 +28,7 @@ https://taskmate.aadish.tech/
 ### Prerequisites
 
 - Node.js and npm
-- PostgreSQL installed
+- MongoDB installed
 - JWT secret key for authentication
 
 ### Install Dependencies
@@ -60,10 +60,10 @@ https://taskmate.aadish.tech/
 
    ```
    JWT_SECRET=your_jwt_secret_key
-   DATABASE_URL=your_postgresql_connection_string
+   DATABASE_URL=your_MongoDB_connection_string
    ```
 
-   Replace `your_jwt_secret_key` with a strong secret key and `your_postgresql_connection_string` with your PostgreSQL connection string.
+   Replace `your_jwt_secret_key` with a strong secret key and `your_MongoDB_connection_string` with your MongoDB connection string.
 
 2. Create a `.env` file in the frontend directory with:
 
