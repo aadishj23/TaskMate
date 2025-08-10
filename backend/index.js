@@ -20,6 +20,10 @@ app.use((err,req,res,next)=>{
     })
 })
 
+app.get("/",(req,res)=>{
+    res.send("Hello TaskMate User")
+})
+
 app.post("/create", auth,async (req,res) => {
     const {title,description,userID}= req.body
     const parsedpayload=createtodo.safeParse(req.body)
