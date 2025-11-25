@@ -3,7 +3,7 @@
 TaskMate is a task management application that helps users to organize their tasks and improve productivity. It features user authentication using JWT (JSON Web Tokens) and bcrypt for secure password hashing, ensuring a secure experience for every user.
 
 ## Website
-https://taskmate.aadish.tech/
+https://taskmate.aadishjain.dev/
 
 ## Features
 
